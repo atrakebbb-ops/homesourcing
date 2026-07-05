@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Great Home Sourcing & Finance - Tbilisi Real Estate</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #0F0F1A; 
+    color: #F5F0E8; 
+    line-height: 1.6;
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 1rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(15, 15, 26, 0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201, 169, 110, 0.15);
+  }
+  .logo { display: flex; align-items: center; gap: 0.7rem; }
+  .logo-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(135deg, #C9A96E, #C75B39);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+  }
+  .logo-text { font-size: 1.4rem; font-weight: 700; color: #E8D5A3; }
+  .logo-sub { font-size: 0.6rem; letter-spacing: 2px; color: rgba(245,240,232,0.5); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: rgba(245,240,232,0.7); font-size: 0.85rem;
+    font-weight: 500; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: #C9A96E; }
+  .nav-cta {
+    padding: 0.6rem 1.5rem; border-radius: 50px;
+    background: linear-gradient(135deg, #C9A96E, #C75B39);
+    color: white; font-weight: 600; font-size: 0.8rem; border: none; cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .nav-cta:hover { transform: translateY(-2px); }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh; position: relative; display: flex; align-items: center;
+    padding: 0 3rem; padding-top: 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(135deg, rgba(26,26,46,0.9) 0%, rgba(15,15,26,0.85) 50%, rgba(45,90,74,0.2) 100%);
+  }
+  .hero-img {
+    position: absolute; inset: 0; z-index: -1;
+    background: url('https://kimi-web-img.moonshot.cn/img/georgiaabout.com/ded23cfcfa9c8aee9b1649658ffdc485db1c90b1.jpg') center/cover no-repeat;
+    filter: brightness(0.35) saturate(1.2);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 650px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 1rem; border-radius: 50px;
+    background: rgba(201,169,110,0.15); border: 1px solid rgba(201,169,110,0.3);
+    color: #C9A96E; font-size: 0.75rem; font-weight: 500; margin-bottom: 1.5rem;
+  }
+  .hero-badge::before {
+    content: ''; width: 8px; height: 8px; background: #C9A96E;
+    border-radius: 50%; animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .hero h1 {
+    font-size: 3.5rem; font-weight: 700;
+    line-height: 1.1; color: #FFFFFF; margin-bottom: 1.2rem;
+  }
+  .hero h1 span { color: #C9A96E; font-style: italic; }
+  .hero p {
+    font-size: 1.1rem; color: rgba(245,240,232,0.7);
+    margin-bottom: 2rem; max-width: 500px;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 0.9rem 2rem; border-radius: 50px;
+    background: linear-gradient(135deg, #C9A96E, #C75B39);
+    color: white; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,169,110,0.3); }
+  .btn-secondary {
+    padding: 0.9rem 2rem; border-radius: 50px;
+    background: transparent; color: #F5F0E8; font-weight: 600;
+    font-size: 0.9rem; border: 1px solid rgba(245,240,232,0.3); cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover { border-color: #C9A96E; color: #C9A96E; }
+
+  /* Stats Bar */
+  .stats-bar {
+    display: flex; justify-content: center; gap: 4rem;
+    padding: 2.5rem 3rem; background: #1A1A2E;
+    border-top: 1px solid rgba(201,169,110,0.1); border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+  .stat-item { text-align: center; }
+  .stat-num { font-size: 2.5rem; font-weight: 700; color: #C9A96E; }
+  .stat-label { font-size: 0.8rem; color: rgba(245,240,232,0.5); margin-top: 0.3rem; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* Search Section */
+  .search-section { padding: 0 3rem; position: relative; z-index: 3; margin-top: -2rem; }
+  .search-box {
+    background: #1A1A2E; border-radius: 16px; padding: 1.5rem;
+    border: 1px solid rgba(201,169,110,0.15);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+    display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap;
+  }
+  .search-field { flex: 1; min-width: 160px; }
+  .search-field label { display: block; font-size: 0.7rem; color: #C9A96E; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.4rem; font-weight: 600; }
+  .search-field input, .search-field select {
+    width: 100%; padding: 0.8rem 1rem; border-radius: 10px;
+    background: rgba(245,240,232,0.05); border: 1px solid rgba(245,240,232,0.1);
+    color: #F5F0E8; font-size: 0.9rem; outline: none;
+  }
+  .search-field input:focus, .search-field select:focus { border-color: #C9A96E; }
+  .search-btn {
+    padding: 0.8rem 1.5rem; border-radius: 10px;
+    background: linear-gradient(135deg, #C9A96E, #C75B39);
+    color: white; font-weight: 600; border: none; cursor: pointer;
+    transition: all 0.3s; white-space: nowrap;
+  }
+  .search-btn:hover { transform: translateY(-2px); }
+
+  /* Section Styles */
+  .section { padding: 5rem 3rem; }
+  .section-header { text-align: center; margin-bottom: 3rem; }
+  .section-label {
+    display: inline-block; padding: 0.3rem 1rem; border-radius: 50px;
+    background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2);
+    color: #C9A96E; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+  .section-title { font-size: 2.5rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.8rem; }
+  .section-desc { font-size: 1rem; color: rgba(245,240,232,0.6); max-width: 550px; margin: 0 auto; line-height: 1.6; }
+
+  /* Properties Grid */
+  .properties-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;
+  }
+  .property-card {
+    background: #1A1A2E; border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(201,169,110,0.1);
+    transition: all 0.4s ease; cursor: pointer;
+  }
+  .property-card:hover { transform: translateY(-6px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); border-color: rgba(201,169,110,0.3); }
+  .property-img { height: 220px; position: relative; overflow: hidden; }
+  .property-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .property-card:hover .property-img img { transform: scale(1.05); }
+  .property-badge {
+    position: absolute; top: 0.8rem; left: 0.8rem;
+    padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.7rem; font-weight: 600;
+  }
+  .badge-sale { background: #C75B39; color: white; }
+  .badge-rent { background: #2D5A4A; color: white; }
+  .badge-new { background: #C9A96E; color: #1A1A2E; }
+  .property-fav {
+    position: absolute; top: 0.8rem; right: 0.8rem; width: 32px; height: 32px;
+    border-radius: 50%; background: rgba(0,0,0,0.5); border: none; color: white; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; font-size: 1rem;
+    transition: all 0.3s;
+  }
+  .property-fav:hover, .property-fav.active { background: #C75B39; }
+  .property-info { padding: 1.2rem; }
+  .property-price { font-size: 1.4rem; font-weight: 700; color: #C9A96E; margin-bottom: 0.2rem; }
+  .property-title { font-size: 1rem; font-weight: 600; color: #FFFFFF; margin-bottom: 0.3rem; }
+  .property-loc { font-size: 0.8rem; color: rgba(245,240,232,0.5); margin-bottom: 0.8rem; }
+  .property-features { display: flex; gap: 1rem; padding-top: 0.8rem; border-top: 1px solid rgba(245,240,232,0.08); flex-wrap: wrap; }
+  .feature { font-size: 0.8rem; color: rgba(245,240,232,0.6); }
+
+  /* Financing */
+  .financing-section { background: linear-gradient(180deg, #0F0F1A 0%, #1A1A2E 100%); }
+  .financing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .financing-visual { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+  .financing-visual img { width: 100%; height: 450px; object-fit: cover; }
+  .financing-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 1.5rem; background: linear-gradient(transparent, rgba(15,15,26,0.95));
+  }
+  .rate-card {
+    background: rgba(201,169,110,0.15); backdrop-filter: blur(10px);
+    border: 1px solid rgba(201,169,110,0.3); border-radius: 14px;
+    padding: 1.2rem; display: flex; align-items: center; gap: 1.2rem;
+  }
+  .rate-value { font-size: 2.2rem; font-weight: 700; color: #C9A96E; }
+  .rate-info h4 { color: #FFFFFF; font-size: 0.95rem; }
+  .rate-info p { color: rgba(245,240,232,0.6); font-size: 0.8rem; }
+  .financing-options { display: flex; flex-direction: column; gap: 1rem; }
+  .f-option {
+    padding: 1.2rem; border-radius: 14px;
+    background: rgba(245,240,232,0.03); border: 1px solid rgba(245,240,232,0.08);
+    transition: all 0.3s; display: flex; align-items: flex-start; gap: 1rem;
+  }
+  .f-option:hover { background: rgba(201,169,110,0.08); border-color: rgba(201,169,110,0.2); transform: translateX(5px); }
+  .f-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, #C9A96E, #C75B39);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    font-size: 1.2rem;
+  }
+  .f-content h4 { color: #FFFFFF; font-size: 1rem; margin-bottom: 0.2rem; }
+  .f-content p { color: rgba(245,240,232,0.5); font-size: 0.85rem; line-height: 1.5; }
+
+  /* Calculator */
+  .calc-section { background: #1A1A2E; }
+  .calc-container {
+    max-width: 800px; margin: 0 auto;
+    background: rgba(245,240,232,0.03); border-radius: 20px;
+    border: 1px solid rgba(201,169,110,0.1); padding: 2.5rem;
+  }
+  .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .calc-field label { display: block; font-size: 0.75rem; color: #C9A96E; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 600; }
+  .calc-field input[type="range"] { width: 100%; margin-bottom: 0.4rem; accent-color: #C9A96E; }
+  .calc-field .value-display { font-size: 1.3rem; color: #FFFFFF; font-weight: 600; }
+  .calc-result {
+    background: linear-gradient(135deg, rgba(201,169,110,0.15), rgba(199,91,57,0.1));
+    border-radius: 14px; padding: 1.5rem; text-align: center;
+    border: 1px solid rgba(201,169,110,0.2);
+  }
+  .calc-result-label { font-size: 0.8rem; color: rgba(245,240,232,0.6); text-transform: uppercase; letter-spacing: 1px; }
+  .calc-result-value { font-size: 2.5rem; font-weight: 700; color: #C9A96E; margin: 0.5rem 0; }
+  .calc-result-sub { font-size: 0.85rem; color: rgba(245,240,232,0.5); }
+
+  /* Districts */
+  .districts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+  .district-card {
+    position: relative; border-radius: 16px; overflow: hidden; height: 280px; cursor: pointer;
+    transition: all 0.4s;
+  }
+  .district-card:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(0,0,0,0.4); }
+  .district-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .district-card:hover img { transform: scale(1.08); }
+  .district-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(transparent 30%, rgba(15,15,26,0.9) 100%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 1.2rem;
+  }
+  .district-name { font-size: 1.2rem; font-weight: 700; color: #FFFFFF; }
+  .district-count { font-size: 0.8rem; color: #C9A96E; margin-top: 0.2rem; }
+
+  /* Testimonials */
+  .testimonials-section { background: #1A1A2E; }
+  .testimonials-slider {
+    display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem;
+    scrollbar-width: none;
+  }
+  .testimonials-slider::-webkit-scrollbar { display: none; }
+  .testimonial-card {
+    min-width: 360px;
+    background: rgba(245,240,232,0.03); border-radius: 16px;
+    border: 1px solid rgba(245,240,232,0.08); padding: 2rem;
+  }
+  .testimonial-stars { color: #C9A96E; font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .testimonial-text { font-size: 0.95rem; line-height: 1.6; color: rgba(245,240,232,0.8); margin-bottom: 1.2rem; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+  .testimonial-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: linear-gradient(135deg, #C9A96E, #C75B39);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: white; font-size: 1rem;
+  }
+  .testimonial-name { font-weight: 600; color: #FFFFFF; font-size: 0.9rem; }
+  .testimonial-role { font-size: 0.8rem; color: rgba(245,240,232,0.5); }
+
+  /* CTA */
+  .cta-section {
+    padding: 5rem 3rem; text-align: center;
+    background: linear-gradient(135deg, rgba(201,169,110,0.08), rgba(45,90,74,0.08));
+    border-top: 1px solid rgba(201,169,110,0.1); border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+  .cta-title { font-size: 2.8rem; font-weight: 700; color: #FFFFFF; margin-bottom: 0.8rem; }
+  .cta-desc { font-size: 1.1rem; color: rgba(245,240,232,0.6); max-width: 500px; margin: 0 auto 2rem; }
+
+  /* Footer */
+  .footer { background: #0F0F1A; padding: 3rem; border-top: 1px solid rgba(201,169,110,0.1); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2.5rem; margin-bottom: 2.5rem; }
+  .footer-brand .logo-text { margin-bottom: 0.8rem; display: inline-block; font-size: 1.5rem; color: #E8D5A3; font-weight: 700; }
+  .footer-brand p { color: rgba(245,240,232,0.5); font-size: 0.85rem; line-height: 1.6; margin-bottom: 1.2rem; }
+  .footer-social { display: flex; gap: 0.6rem; }
+  .social-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: rgba(245,240,232,0.05); border: 1px solid rgba(245,240,232,0.1);
+    display: flex; align-items: center; justify-content: center; color: rgba(245,240,232,0.6);
+    transition: all 0.3s; cursor: pointer; font-size: 0.8rem; font-weight: 600;
+  }
+  .social-icon:hover { background: #C9A96E; color: #0F0F1A; border-color: #C9A96E; }
+  .footer-col h4 { color: #FFFFFF; font-size: 0.95rem; margin-bottom: 1.2rem; font-weight: 600; }
+  .footer-col a { display: block; color: rgba(245,240,232,0.5); text-decoration: none; font-size: 0.85rem; margin-bottom: 0.6rem; transition: color 0.3s; }
+  .footer-col a:hover { color: #C9A96E; }
+  .footer-bottom {
+    border-top: 1px solid rgba(245,240,232,0.08); padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { color: rgba(245,240,232,0.4); font-size: 0.8rem; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .financing-grid { grid-template-columns: 1fr; }
+    .districts-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .navbar { padding: 0.8rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 0 1.5rem; padding-top: 80px; }
+    .hero h1 { font-size: 2.2rem; }
+    .section { padding: 3rem 1.5rem; }
+    .stats-bar { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; }
+    .search-box { flex-direction: column; padding: 1.2rem; }
+    .properties-grid { grid-template-columns: 1fr; }
+    .districts-grid { grid-template-columns: 1fr; }
+    .calc-row { grid-template-columns: 1fr; }
+    .testimonial-card { min-width: 280px; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 0.8rem; text-align: center; }
+    .cta-title { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="logo">
+    <div class="logo-icon">&#127963;</div>
+    <div>
+      <div class="logo-text">Great Home</div>
+      <div class="logo-sub">Sourcing & Finance</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#financing">Financing</a></li>
+    <li><a href="#calculator">Calculator</a></li>
+    <li><a href="#districts">Districts</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <button class="nav-cta">Get Pre-Approved</button>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Now Serving Tbilisi & All Georgia</div>
+    <h1>Find Your <span>Dream Home</span> in the Heart of Tbilisi</h1>
+    <p>Georgia's most trusted real estate sourcing and mortgage financing partner. From historic Old Town balconies to modern Saburtalo towers.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Browse Properties</button>
+      <button class="btn-secondary">Check Loan Rates</button>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">1,240+</div>
+    <div class="stat-label">Properties Listed</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">$340M</div>
+    <div class="stat-label">Loans Facilitated</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">98%</div>
+    <div class="stat-label">Client Satisfaction</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">12</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+</div>
+
+<!-- Search -->
+<div class="search-section">
+  <div class="search-box">
+    <div class="search-field">
+      <label>Location</label>
+      <select>
+        <option>All Tbilisi Districts</option>
+        <option>Old Town (Abanotubani)</option>
+        <option>Vake</option>
+        <option>Saburtalo</option>
+        <option>Digomi</option>
+        <option>Didi Dighomi</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Property Type</label>
+      <select>
+        <option>All Types</option>
+        <option>Apartment</option>
+        <option>House / Villa</option>
+        <option>Penthouse</option>
+        <option>Commercial</option>
+        <option>Land Plot</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Price Range</label>
+      <select>
+        <option>Any Price</option>
+        <option>$50,000 - $100,000</option>
+        <option>$100,000 - $250,000</option>
+        <option>$250,000 - $500,000</option>
+        <option>$500,000+</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Financing</label>
+      <select>
+        <option>Any Status</option>
+        <option>Cash Purchase</option>
+        <option>Mortgage Ready</option>
+        <option>Installment Plan</option>
+      </select>
+    </div>
+    <button class="search-btn">Search Properties</button>
+  </div>
+</div>
+
+<!-- Featured Properties -->
+<section class="section" id="properties">
+  <div class="section-header">
+    <div class="section-label">Curated Listings</div>
+    <h2 class="section-title">Featured Properties in Tbilisi</h2>
+    <p class="section-desc">Hand-picked homes that blend Georgian charm with modern comfort, all with financing options available.</p>
+  </div>
+  <div class="properties-grid">
+    <div class="property-card">
+      <div class="property-img">
+        <img src="https://kimi-web-img.moonshot.cn/img/georgiaabout.com/8b86f1a421e96020143b49685d931557a6b5ebab.jpg" alt="Old Town Balcony Home">
+        <span class="property-badge badge-sale">For Sale</span>
+        <button class="property-fav" onclick="this.classList.toggle('active')">&#9825;</button>
+      </div>
+      <div class="property-info">
+        <div class="property-price">$285,000</div>
+        <div class="property-title">Historic Balcony Residence - Old Town</div>
+        <div class="property-loc">&#128205; Abanotubani, Tbilisi Old Town</div>
+        <div class="property-features">
+          <span class="feature">&#128719; 3 Beds</span>
+          <span class="feature">&#128701; 2 Baths</span>
+          <span class="feature">&#128208; 145 m&#178;</span>
+          <span class="feature">&#127957; Mountain View</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="property-card">
+      <div class="property-img">
+        <img src="https://kimi-web-img.moonshot.cn/img/worldestate.homes/be4548e5b5c39f965332efbef1817c878277806b.jpg" alt="Modern Saburtalo Complex">
+        <span class="property-badge badge-new">New Build</span>
+        <button class="property-fav" onclick="this.classList.toggle('active')">&#9825;</button>
+      </div>
+      <div class="property-info">
+        <div class="property-price">$175,000</div>
+        <div class="property-title">Panorama Residence - Saburtalo</div>
+        <div class="property-loc">&#128205; Saburtalo District, Tbilisi</div>
+        <div class="property-features">
+          <span class="feature">&#128719; 2 Beds</span>
+          <span class="feature">&#128701; 2 Baths</span>
+          <span class="feature">&#128208; 98 m&#178;</span>
+          <span class="feature">&#127946; Pool Access</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="property-card">
+      <div class="property-img">
+        <img src="https://kimi-web-img.moonshot.cn/img/img.jamesedition.com/f2bfe8152b38460661c7e4367e090694fdd4ce15.jpg" alt="Luxury Villa Tbilisi">
+        <span class="property-badge badge-sale">For Sale</span>
+        <button class="property-fav" onclick="this.classList.toggle('active')">&#9825;</button>
+      </div>
+      <div class="property-info">
+        <div class="property-price">$890,000</div>
+        <div class="property-title">Modern Villa with Pool - Didi Dighomi</div>
+        <div class="property-loc">&#128205; Didi Dighomi, Tbilisi</div>
+        <div class="property-features">
+          <span class="feature">&#128719; 5 Beds</span>
+          <span class="feature">&#128701; 4 Baths</span>
+          <span class="feature">&#128208; 420 m&#178;</span>
+          <span class="feature">&#127946; Private Pool</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="property-card">
+      <div class="property-img">
+        <img src="https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/aff2a68f8d1438854f8052fe00cce9db64618ec5.jpg" alt="Saburtalo Modern">
+        <span class="property-badge badge-rent">For Rent</span>
+        <button class="property-fav" onclick="this.classList.toggle('active')">&#9825;</button>
+      </div>
+      <div class="property-info">
+        <div class="property-price">$1,200<span style="font-size:0.85rem;color:rgba(245,240,232,0.5)">/mo</span></div>
+        <div class="property-title">City View Apartment - Saburtalo</div>
+        <div class="property-loc">&#128205; Saburtalo, Near Metro</div>
+        <div class="property-features">
+          <span class="feature">&#128719; 2 Beds</span>
+          <span class="feature">&#128701; 1 Bath</span>
+          <span class="feature">&#128208; 75 m&#178;</span>
+          <span class="feature">&#128647; Metro Nearby</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="property-card">
+      <div class="property-img">
+        <img src="https://kimi-web-img.moonshot.cn/img/www.e-architect.com/cd4e7d94e424f8a5cc79c8491cb4b232b0b8b754.webp" alt="Cityzen Tower">
+        <span class="property-badge badge-new">Pre-Construction</span>
+        <button class="property-fav" onclick="this.classList.toggle('active')">&#9825;</button>
+      </div>
+      <div class="property-info">
+        <div class="property-price">$420,000</div>
+        <div class="property-title">Sky Residence - Cityzen Tower</div>
+        <div class="property-loc">&#128205; Vake-Saburtalo Highway, Tbilisi</div>
+        <div class="property-features">
+          <span class="feature">&#128719; 3 Beds</span>
+          <span class="feature">&#128701; 2 Baths</span>
+          <span class="feature">&#128208; 180 m&#178;</span>
+          <span class="feature">&#127750; City View</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="property-card">
+      <div class="property-img">
+        <img src="https://kimi-web-img.moonshot.cn/img/img.jamesedition.com/dfcc14a36d082a4cfc2fe56c9ca6704da6a502e5.jpg" alt="Night Villa">
+        <span class="property-badge badge-sale">For Sale</span>
+        <button class="property-fav" onclick="this.classList.toggle('active')">&#9825;</button>
+      </div>
+      <div class="property-info">
+        <div class="property-price">$1,250,000</div>
+        <div class="property-title">Architectural Masterpiece - Vake</div>
+        <div class="property-loc">&#128205; Vake District, Tbilisi</div>
+        <div class="property-features">
+          <span class="feature">&#128719; 6 Beds</span>
+          <span class="feature">&#128701; 5 Baths</span>
+          <span class="feature">&#128208; 580 m&#178;</span>
+          <span class="feature">&#127795; Garden</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Financing Section -->
+<section class="section financing-section" id="financing">
+  <div class="section-header">
+    <div class="section-label">Mortgage & Loans</div>
+    <h2 class="section-title">Smart Financing for Georgian Homes</h2>
+    <p class="section-desc">We partner with leading Georgian banks to secure the best mortgage rates and flexible payment plans for locals and foreign investors alike.</p>
+  </div>
+  <div class="financing-grid">
+    <div class="financing-visual">
+      <img src="https://kimi-web-img.moonshot.cn/img/georgiaabout.com/84ce79be3fa1c41440054b8dd9657bda111bee85.jpg" alt="Traditional Georgian Home">
+      <div class="financing-overlay">
+        <div class="rate-card">
+          <div class="rate-value">8.5%</div>
+          <div class="rate-info">
+            <h4>Starting Annual Rate</h4>
+            <p>Fixed for first 3 years - GEL & USD options</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="financing-options">
+      <div class="f-option">
+        <div class="f-icon">&#127974;</div>
+        <div class="f-content">
+          <h4>Mortgage Loans</h4>
+          <p>Up to 80% LTV financing with terms from 5 to 20 years. Available for both residents and non-residents purchasing property in Georgia.</p>
+        </div>
+      </div>
+      <div class="f-option">
+        <div class="f-icon">&#128197;</div>
+        <div class="f-content">
+          <h4>Installment Plans</h4>
+          <p>Developer-backed 0% interest installment plans up to 36 months on new construction projects across Tbilisi.</p>
+        </div>
+      </div>
+      <div class="f-option">
+        <div class="f-icon">&#127758;</div>
+        <div class="f-content">
+          <h4>Foreign Investor Loans</h4>
+          <p>Specialized financing packages for international buyers with simplified documentation and remote processing.</p>
+        </div>
+      </div>
+      <div class="f-option">
+        <div class="f-icon">&#128295;</div>
+        <div class="f-content">
+          <h4>Renovation & Construction</h4>
+          <p>Finance your dream renovation or self-build project with flexible draw schedules and competitive rates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Calculator -->
+<section class="section calc-section" id="calculator">
+  <div class="section-header">
+    <div class="section-label">Plan Ahead</div>
+    <h2 class="section-title">Mortgage Calculator</h2>
+    <p class="section-desc">Estimate your monthly payments and explore financing scenarios tailored to the Georgian market.</p>
+  </div>
+  <div class="calc-container">
+    <div class="calc-row">
+      <div class="calc-field">
+        <label>Property Price (USD)</label>
+        <input type="range" id="priceRange" min="50000" max="2000000" value="250000" step="5000" oninput="updateCalc()">
+        <div class="value-display" id="priceValue">$250,000</div>
+      </div>
+      <div class="calc-field">
+        <label>Down Payment (USD)</label>
+        <input type="range" id="downRange" min="10000" max="1000000" value="50000" step="5000" oninput="updateCalc()">
+        <div class="value-display" id="downValue">$50,000</div>
+      </div>
+    </div>
+    <div class="calc-row">
+      <div class="calc-field">
+        <label>Interest Rate (%)</label>
+        <input type="range" id="rateRange" min="3" max="15" value="8.5" step="0.1" oninput="updateCalc()">
+        <div class="value-display" id="rateValue">8.5%</div>
+      </div>
+      <div class="calc-field">
+        <label>Loan Term (Years)</label>
+        <input type="range" id="termRange" min="5" max="30" value="15" step="1" oninput="updateCalc()">
+        <div class="value-display" id="termValue">15 Years</div>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="calc-result-label">Estimated Monthly Payment</div>
+      <div class="calc-result-value" id="monthlyPayment">$1,956</div>
+      <div class="calc-result-sub">Total interest over loan term: <span id="totalInterest" style="color:#C9A96E">$102,080</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Districts -->
+<section class="section" id="districts">
+  <div class="section-header">
+    <div class="section-label">Explore Tbilisi</div>
+    <h2 class="section-title">Popular Districts</h2>
+    <p class="section-desc">Each neighborhood tells a different story. Discover where your next chapter begins.</p>
+  </div>
+  <div class="districts-grid">
+    <div class="district-card">
+      <img src="https://kimi-web-img.moonshot.cn/img/georgiaabout.com/ded23cfcfa9c8aee9b1649658ffdc485db1c90b1.jpg" alt="Old Town">
+      <div class="district-overlay">
+        <div class="district-name">Old Town</div>
+        <div class="district-count">142 Properties</div>
+      </div>
+    </div>
+    <div class="district-card">
+      <img src="https://kimi-web-img.moonshot.cn/img/worldestate.homes/be4548e5b5c39f965332efbef1817c878277806b.jpg" alt="Saburtalo">
+      <div class="district-overlay">
+        <div class="district-name">Saburtalo</div>
+        <div class="district-count">389 Properties</div>
+      </div>
+    </div>
+    <div class="district-card">
+      <img src="https://kimi-web-img.moonshot.cn/img/img.jamesedition.com/dfcc14a36d082a4cfc2fe56c9ca6704da6a502e5.jpg" alt="Vake">
+      <div class="district-overlay">
+        <div class="district-name">Vake</div>
+        <div class="district-count">215 Properties</div>
+      </div>
+    </div>
+    <div class="district-card">
+      <img src="https://kimi-web-img.moonshot.cn/img/img.jamesedition.com/f2bfe8152b38460661c7e4367e090694fdd4ce15.jpg" alt="Didi Dighomi">
+      <div class="district-overlay">
+        <div class="district-name">Didi Dighomi</div>
+        <div class="district-count">178 Properties</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section testimonials-section">
+  <div class="section-header">
+    <div class="section-label">Client Stories</div>
+    <h2 class="section-title">What Our Clients Say</h2>
+    <p class="section-desc">Real stories from real homeowners who found their place in Georgia with us.</p>
+  </div>
+  <div class="testimonials-slider">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="testimonial-text">"Great Home made buying our apartment in Saburtalo incredibly smooth. Their financing team secured us a rate 1.2% lower than what the bank initially offered. Truly exceptional service."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">NK</div>
+        <div>
+          <div class="testimonial-name">Nino Kvaratskhelia</div>
+          <div class="testimonial-role">Bought in Saburtalo, 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="testimonial-text">"As a foreign investor from Germany, I was worried about the process. Great Home handled everything from property sourcing to mortgage approval entirely remotely. I now own a beautiful villa in Vake."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">MH</div>
+        <div>
+          <div class="testimonial-name">Markus Hoffmann</div>
+          <div class="testimonial-role">Investor from Munich</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="testimonial-text">"The mortgage calculator on their website was spot-on. We knew exactly what to expect before even visiting Tbilisi. When we arrived, they had 5 perfect properties lined up. Found our dream home in Old Town in 3 days!"</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">SB</div>
+        <div>
+          <div class="testimonial-name">Sophie & Brian Carter</div>
+          <div class="testimonial-role">Relocated from London</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div>
+    <h2 class="cta-title">Ready to Find Your Home?</h2>
+    <p class="cta-desc">Let our experts guide you through every step from browsing listings to signing your mortgage.</p>
+    <div class="hero-btns" style="justify-content:center">
+      <button class="btn-primary">Schedule a Consultation</button>
+      <button class="btn-secondary">+995 32 2 00 00 00</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-text">Great Home</div>
+      <p>Georgia's premier real estate sourcing and mortgage financing platform. Connecting people with properties and making homeownership accessible since 2014.</p>
+      <div class="footer-social">
+        <div class="social-icon">f</div>
+        <div class="social-icon">in</div>
+        <div class="social-icon">ig</div>
+        <div class="social-icon">tg</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Properties</h4>
+      <a href="#">Apartments for Sale</a>
+      <a href="#">Houses & Villas</a>
+      <a href="#">New Developments</a>
+      <a href="#">Commercial Real Estate</a>
+      <a href="#">Land Plots</a>
+    </div>
+    <div class="footer-col">
+      <h4>Financing</h4>
+      <a href="#">Mortgage Calculator</a>
+      <a href="#">Loan Pre-Approval</a>
+      <a href="#">Interest Rates</a>
+      <a href="#">Foreign Buyer Guide</a>
+      <a href="#">Installment Plans</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Our Team</a>
+      <a href="#">Careers</a>
+      <a href="#">Blog & Insights</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&#169; 2026 Great Home Sourcing & Finance. All rights reserved. Licensed by National Bank of Georgia.</p>
+    <p>Made with care in Tbilisi</p>
+  </div>
+</footer>
+
+<script>
+  // Mortgage Calculator
+  function updateCalc() {
+    const price = parseInt(document.getElementById('priceRange').value);
+    const down = parseInt(document.getElementById('downRange').value);
+    const rate = parseFloat(document.getElementById('rateRange').value);
+    const years = parseInt(document.getElementById('termRange').value);
+
+    document.getElementById('priceValue').textContent = '$' + price.toLocaleString();
+    document.getElementById('downValue').textContent = '$' + down.toLocaleString();
+    document.getElementById('rateValue').textContent = rate + '%';
+    document.getElementById('termValue').textContent = years + ' Years';
+
+    const principal = price - down;
+    const monthlyRate = rate / 100 / 12;
+    const numPayments = years * 12;
+
+    let monthly = 0;
+    if (rate === 0) {
+      monthly = principal / numPayments;
+    } else {
+      monthly = principal * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+    }
+
+    const totalPaid = monthly * numPayments;
+    const totalInt = totalPaid - principal;
+
+    document.getElementById('monthlyPayment').textContent = '$' + Math.round(monthly).toLocaleString();
+    document.getElementById('totalInterest').textContent = '$' + Math.round(totalInt).toLocaleString();
+  }
+  updateCalc();
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
